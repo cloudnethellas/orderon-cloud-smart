@@ -98,7 +98,7 @@ function Index() {
   const [terminals, setTerminals] = useState(1);
   const [pdas, setPdas] = useState(2);
   const estimate = 39 + (terminals - 1) * 18 + pdas * 7;
-  const demo = demos[activeDemo];
+  const demo = demos[activeDemo] ?? demos[0];
 
   return <main className="min-h-screen overflow-hidden bg-background text-foreground">
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur-xl">
