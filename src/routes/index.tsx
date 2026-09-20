@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   BarChart3,
@@ -63,6 +64,12 @@ const demos = [
   { id: "floor", label: "3D / 2D Κάτοψη", title: "Κάθε τραπέζι, σε πραγματικό χρόνο", text: "Δείτε ανοικτούς λογαριασμούς, πληρότητα και κατάσταση σάλας σε διαδραστική 3D ή 2D απεικόνιση.", image: floor3d.url, alt: "Τρισδιάστατη κάτοψη τραπεζιών OrderOn" },
   { id: "pos", label: "Ταμείο & Delivery", title: "Ένα ταμείο για κάθε κανάλι πώλησης", text: "Σάλα, delivery και take away σε μία καθαρή ροή εργασίας, με οργάνωση ειδών και γρήγορη πληρωμή.", image: pos.url, alt: "Οθόνη παραγγελίας και ταμείου OrderOn" },
   { id: "reports", label: "Αναφορές", title: "Οι αριθμοί που χρειάζεστε, όταν τους χρειάζεστε", text: "Αναλυτική εικόνα βάρδιας, τζίρου, λογαριασμών και απόδοσης για καλύτερες αποφάσεις.", image: tables2d.url, alt: "Πίνακας διαχείρισης τραπεζιών OrderOn" },
+] as const;
+
+const services: Array<{ icon: LucideIcon; title: string; text: string }> = [
+  { icon: Cable, title: "Εγκαταστάσεις Δικτύων", text: "Δομημένη καλωδίωση, rack, ανθεκτικά access points, seamless roaming, bandwidth management και failover 4G/5G." },
+  { icon: Wifi, title: "Wi-Fi Marketing", text: "Captive portal, social login και νόμιμη συλλογή επαφών με αυτοματοποιημένες καμπάνιες και loyalty." },
+  { icon: Camera, title: "CCTV & Συναγερμοί", text: "IP κάμερες υψηλής ανάλυσης, NVR με απομακρυσμένη θέαση και πιστοποιημένοι συναγερμοί με σύνδεση σε κέντρο σημάτων." },
 ];
 
 function DemoForm({ interest = "OrderOn" }: { interest?: string }) {
@@ -139,11 +146,7 @@ function Index() {
       </div></section>
 
     <section id="services" className="bg-ink py-20 text-ink-foreground lg:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="grid gap-8 lg:grid-cols-2"><div><span className="eyebrow text-tech">CloudNet Solutions</span><h2 className="mt-4 text-4xl font-bold sm:text-5xl">Η τεχνολογία πίσω από μια επιχείρηση που δεν σταματά.</h2></div><p className="self-end text-lg leading-relaxed text-ink-muted">Από το καλώδιο και το Wi-Fi μέχρι την ασφάλεια του χώρου σας, σχεδιάζουμε υποδομές με έναν υπεύθυνο συνεργάτη.</p></div>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-lg bg-ink-border md:grid-cols-3">{[
-          [Cable,"Εγκαταστάσεις Δικτύων","Δομημένη καλωδίωση, rack, ανθεκτικά access points, seamless roaming, bandwidth management και failover 4G/5G."],
-          [Wifi,"Wi-Fi Marketing","Captive portal, social login και νόμιμη συλλογή επαφών με αυτοματοποιημένες καμπάνιες και loyalty."],
-          [Camera,"CCTV & Συναγερμοί","IP κάμερες υψηλής ανάλυσης, NVR με απομακρυσμένη θέαση και πιστοποιημένοι συναγερμοί με σύνδεση σε κέντρο σημάτων."],
-        ].map(([Icon,title,text])=><article key={String(title)} className="bg-ink p-7 lg:p-9"><Icon className="size-8 text-tech"/><h3 className="mt-8 text-xl font-bold">{String(title)}</h3><p className="mt-3 text-sm leading-relaxed text-ink-muted">{String(text)}</p><a href="#contact" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-tech">Μιλήστε με έναν τεχνικό <ArrowRight className="size-4"/></a></article>)}</div>
+        <div className="mt-12 grid gap-px overflow-hidden rounded-lg bg-ink-border md:grid-cols-3">{services.map(({ icon: Icon, title, text })=><article key={title} className="bg-ink p-7 lg:p-9"><Icon className="size-8 text-tech"/><h3 className="mt-8 text-xl font-bold">{title}</h3><p className="mt-3 text-sm leading-relaxed text-ink-muted">{text}</p><a href="#contact" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-tech">Μιλήστε με έναν τεχνικό <ArrowRight className="size-4"/></a></article>)}</div>
       </div></section>
 
     <section className="py-20 lg:py-28"><div className="mx-auto grid max-w-7xl items-center gap-12 px-5 lg:grid-cols-2 lg:px-8"><div className="overflow-hidden rounded-lg"><img src={restaurant.url} alt="OrderOn εγκατεστημένο σε κατάστημα εστίασης" className="aspect-[4/3] w-full object-cover"/></div><div><span className="eyebrow">Σχεδιασμένο για την πράξη</span><h2 className="mt-4 text-4xl font-bold sm:text-5xl">Από την πρώτη παραγγελία μέχρι το κλείσιμο βάρδιας.</h2><p className="mt-5 text-lg leading-relaxed text-muted-foreground">Το OrderOn ακολουθεί τον ρυθμό της ομάδας σας. Καθαρό περιβάλλον, γρήγορες κινήσεις και άμεση εικόνα της επιχείρησης — ακόμα και στις ώρες αιχμής.</p><div className="mt-8 flex flex-wrap gap-3"><DemoDialog label="Κλείστε παρουσίαση"/><Button asChild variant="outline" size="lg" className="h-12"><a href="#contact">Μιλήστε μαζί μας</a></Button></div></div></div></section>
